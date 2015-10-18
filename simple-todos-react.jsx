@@ -12,3 +12,27 @@ if (Meteor.isClient) {
     React.render(<App />, document.getElementById("render-target"));
   });
 }
+
+Meteor.methods({
+  addTask(text) {
+    // Verify login before adding task
+    if ( ! Meteor.userId()) {
+      throw new Meteor.Error("Not Authorized");
+    }
+
+    Tasks.insert({
+      text: text,
+      createdAt: new Date(),
+      owner: Meteor.userId(),
+      username: Meteor.user().username
+    });
+  },
+
+  removeTask(taskId) {
+    Tasks.remove(taskId);
+  },
+
+  setChecked(taskId, setChecked) {
+    Tasks.update(taskId, { $set: { checked: setChecked} });
+  }
+});

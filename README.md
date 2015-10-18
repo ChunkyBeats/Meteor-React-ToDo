@@ -4,5 +4,5 @@
 ## Initialize Local Server
 
 To initialize localhost server type:
-`meteor`
+`$ meteor`
 into the cmd while in main directory
