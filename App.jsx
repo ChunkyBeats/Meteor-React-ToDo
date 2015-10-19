@@ -21,7 +21,7 @@ App = React.createClass({
       tasks: Tasks.find(query, {sort: {createdAt: -1}}).fetch(),
       incompleteCount: Tasks.find({checked: {$ne: true}}).count(),
       currentUser: Meteor.user()
-    }
+    };
   },
 
   renderTasks() {

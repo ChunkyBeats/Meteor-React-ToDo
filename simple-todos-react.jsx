@@ -31,7 +31,7 @@ if (Meteor.isServer) {
 Meteor.methods({
   addTask(text) {
     // Verify login before adding task
-    if ( ! Meteor.userId()) {
+    if (! Meteor.userId()) {
       throw new Meteor.Error("Not Authorized");
     }
 
@@ -46,7 +46,7 @@ Meteor.methods({
   removeTask(taskId) {
     const task = Tasks.findOne(taskId);
     if (task.private && task.owner !== Meteor.userId()) {
-      throw new Meteor.error("Not Authorized");
+      throw new Meteor.Error("Not Authorized");
     }
 
     Tasks.remove(taskId);
@@ -55,7 +55,7 @@ Meteor.methods({
   setChecked(taskId, setChecked) {
     const task = Tasks.findOne(taskId);
     if (task.private && task.owner !== Meteor.userId()) {
-      throw new Meteor.error("Not Authorized");
+      throw new Meteor.Error("Not Authorized");
     }
 
     Tasks.update(taskId, { $set: { checked: setChecked} });
